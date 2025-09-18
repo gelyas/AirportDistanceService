@@ -1,0 +1,238 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AirportDistanceService</name>
+    </assembly>
+    <members>
+        <member name="T:AirportDistanceService.Controllers.DistanceController">
+            <summary>
+            Контроллер для расчета расстояния между аэропортами
+            </summary>
+        </member>
+        <member name="M:AirportDistanceService.Controllers.DistanceController.CalculateDistance(AirportDistanceService.Models.DistanceRequest,System.Threading.CancellationToken)">
+            <summary>
+            Рассчитывает расстояние между двумя аэропортами
+            </summary>
+            <param name="request">Запрос с кодами аэропортов</param>
+            <param name="cancellationToken">Токен отмены</param>
+            <returns>Информация о расстоянии между аэропортами</returns>
+            <response code="200">Расстояние успешно рассчитано</response>
+            <response code="400">Некорректные параметры запроса</response>
+            <response code="404">Один из аэропортов не найден</response>
+            <response code="500">Внутренняя ошибка сервера</response>
+        </member>
+        <member name="M:AirportDistanceService.Controllers.DistanceController.GetAirport(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Получает информацию об аэропорте по IATA коду
+            </summary>
+            <param name="iataCode">Трехбуквенный код IATA</param>
+            <param name="cancellationToken">Токен отмены</param>
+            <returns>Информация об аэропорте</returns>
+            <response code="200">Информация об аэропорте получена</response>
+            <response code="400">Некорректный код аэропорта</response>
+            <response code="404">Аэропорт не найден</response>
+            <response code="500">Внутренняя ошибка сервера</response>
+        </member>
+        <member name="T:AirportDistanceService.Middleware.GlobalExceptionMiddleware">
+            <summary>
+            Middleware для глобальной обработки исключений
+            </summary>
+        </member>
+        <member name="T:AirportDistanceService.Models.Airport">
+            <summary>
+            Модель аэропорта с информацией о местоположении
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.Airport.Iata">
+            <summary>
+            Трехбуквенный код IATA аэропорта
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.Airport.Name">
+            <summary>
+            Название аэропорта
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.Airport.City">
+            <summary>
+            Город, в котором расположен аэропорт
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.Airport.Country">
+            <summary>
+            Страна, в которой расположен аэропорт
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.Airport.Latitude">
+            <summary>
+            Широта аэропорта
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.Airport.Longitude">
+            <summary>
+            Долгота аэропорта
+            </summary>
+        </member>
+        <member name="T:AirportDistanceService.Models.ApiError">
+            <summary>
+            Модель ошибки API
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.ApiError.ErrorCode">
+            <summary>
+            Код ошибки
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.ApiError.Message">
+            <summary>
+            Сообщение об ошибке
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.ApiError.Details">
+            <summary>
+            Дополнительные детали ошибки
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.ApiError.Timestamp">
+            <summary>
+            Время возникновения ошибки
+            </summary>
+        </member>
+        <member name="T:AirportDistanceService.Models.DistanceRequest">
+            <summary>
+            Модель запроса для расчета расстояния между аэропортами
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.DistanceRequest.FromAirport">
+            <summary>
+            Трехбуквенный код IATA аэропорта отправления
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.DistanceRequest.ToAirport">
+            <summary>
+            Трехбуквенный код IATA аэропорта назначения
+            </summary>
+        </member>
+        <member name="T:AirportDistanceService.Models.DistanceResponse">
+            <summary>
+            Модель ответа с информацией о расстоянии между аэропортами
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.DistanceResponse.FromAirport">
+            <summary>
+            Аэропорт отправления
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.DistanceResponse.ToAirport">
+            <summary>
+            Аэропорт назначения
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.DistanceResponse.DistanceInMiles">
+            <summary>
+            Расстояние в милях
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.DistanceResponse.DistanceInKilometers">
+            <summary>
+            Расстояние в километрах
+            </summary>
+        </member>
+        <member name="P:AirportDistanceService.Models.DistanceResponse.ExecutionTimeMs">
+            <summary>
+            Время выполнения запроса в миллисекундах
+            </summary>
+        </member>
+        <member name="T:AirportDistanceService.Services.AirportService">
+            <summary>
+            Сервис для получения информации об аэропортах
+            </summary>
+        </member>
+        <member name="M:AirportDistanceService.Services.AirportService.GetAirportAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Получает информацию об аэропорте по IATA коду
+            </summary>
+            <param name="iataCode">Трехбуквенный код IATA</param>
+            <param name="cancellationToken">Токен отмены</param>
+            <returns>Информация об аэропорте</returns>
+        </member>
+        <member name="M:AirportDistanceService.Services.AirportService.ValidateAirportData(AirportDistanceService.Models.Airport,System.String)">
+            <summary>
+            Валидирует данные аэропорта
+            </summary>
+            <param name="airport">Данные аэропорта</param>
+            <param name="requestedIataCode">Запрошенный IATA код</param>
+        </member>
+        <member name="T:AirportDistanceService.Services.DistanceCalculationService">
+            <summary>
+            Сервис для расчета расстояния между аэропортами
+            </summary>
+        </member>
+        <member name="M:AirportDistanceService.Services.DistanceCalculationService.CalculateDistanceInMiles(AirportDistanceService.Models.Airport,AirportDistanceService.Models.Airport)">
+            <summary>
+            Рассчитывает расстояние между двумя аэропортами в милях
+            </summary>
+            <param name="fromAirport">Аэропорт отправления</param>
+            <param name="toAirport">Аэропорт назначения</param>
+            <returns>Расстояние в милях</returns>
+        </member>
+        <member name="M:AirportDistanceService.Services.DistanceCalculationService.CalculateDistanceInKilometers(AirportDistanceService.Models.Airport,AirportDistanceService.Models.Airport)">
+            <summary>
+            Рассчитывает расстояние между двумя аэропортами в километрах
+            </summary>
+            <param name="fromAirport">Аэропорт отправления</param>
+            <param name="toAirport">Аэропорт назначения</param>
+            <returns>Расстояние в километрах</returns>
+        </member>
+        <member name="M:AirportDistanceService.Services.DistanceCalculationService.CalculateDistance(AirportDistanceService.Models.Airport,AirportDistanceService.Models.Airport,System.Double)">
+            <summary>
+            Рассчитывает расстояние между двумя точками на сфере по формуле гаверсинуса
+            </summary>
+            <param name="fromAirport">Аэропорт отправления</param>
+            <param name="toAirport">Аэропорт назначения</param>
+            <param name="earthRadius">Радиус Земли в нужных единицах измерения</param>
+            <returns>Расстояние в указанных единицах измерения</returns>
+        </member>
+        <member name="M:AirportDistanceService.Services.DistanceCalculationService.DegreesToRadians(System.Double)">
+            <summary>
+            Конвертирует градусы в радианы
+            </summary>
+            <param name="degrees">Градусы</param>
+            <returns>Радианы</returns>
+        </member>
+        <member name="T:AirportDistanceService.Services.IAirportService">
+            <summary>
+            Интерфейс сервиса для работы с аэропортами
+            </summary>
+        </member>
+        <member name="M:AirportDistanceService.Services.IAirportService.GetAirportAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Получает информацию об аэропорте по IATA коду
+            </summary>
+            <param name="iataCode">Трехбуквенный код IATA</param>
+            <param name="cancellationToken">Токен отмены</param>
+            <returns>Информация об аэропорте</returns>
+        </member>
+        <member name="T:AirportDistanceService.Services.IDistanceCalculationService">
+            <summary>
+            Интерфейс сервиса для расчета расстояния между аэропортами
+            </summary>
+        </member>
+        <member name="M:AirportDistanceService.Services.IDistanceCalculationService.CalculateDistanceInMiles(AirportDistanceService.Models.Airport,AirportDistanceService.Models.Airport)">
+            <summary>
+            Рассчитывает расстояние между двумя аэропортами
+            </summary>
+            <param name="fromAirport">Аэропорт отправления</param>
+            <param name="toAirport">Аэропорт назначения</param>
+            <returns>Расстояние в милях</returns>
+        </member>
+        <member name="M:AirportDistanceService.Services.IDistanceCalculationService.CalculateDistanceInKilometers(AirportDistanceService.Models.Airport,AirportDistanceService.Models.Airport)">
+            <summary>
+            Рассчитывает расстояние между двумя аэропортами
+            </summary>
+            <param name="fromAirport">Аэропорт отправления</param>
+            <param name="toAirport">Аэропорт назначения</param>
+            <returns>Расстояние в километрах</returns>
+        </member>
+    </members>
+</doc>

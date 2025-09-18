@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "pW1GxtUScvfdtGZ8RVg6slTcafK0rYIG/DS8hlALmlw=",
+  "Source": "AirportDistanceService",
+  "BasePath": "_content/AirportDistanceService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
